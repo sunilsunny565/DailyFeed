@@ -2,13 +2,13 @@ package com.assignment.dailyfeed.net;
 
 import android.content.Context;
 
-import com.assignment.dailyfeed.model.FeedModel;
+import com.assignment.dailyfeed.model.FeedItem;
 
 import java.util.List;
 
 public interface GetDataContract {
     interface View{
-        void onGetDataSuccess(String message, List<FeedModel> list);
+        void onGetDataSuccess(String message, List<FeedItem> list);
         void onGetDataFailure(String message);
     }
     interface Presenter{
@@ -19,7 +19,7 @@ public interface GetDataContract {
 
     }
     interface onGetDataListener{
-        void onSuccess(String message, List<FeedModel> list);
+        void onSuccess(String message, List<FeedItem> list);
         void onFailure(String message);
     }
 }
