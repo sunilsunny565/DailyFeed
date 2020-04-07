@@ -8,14 +8,8 @@ import com.assignment.dailyfeed.model.FeedModel;
 import com.assignment.dailyfeed.model.FeedResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -31,23 +25,12 @@ public class Interactor implements GetDataContract.Interactor{
     }
 
     @Override
-    public void initRetrofitCall(Context context, String url) {
+    public void initRetrofitCall(Context context) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(@NotNull String s) {
-                Log.e("interceptor",s);
-            }
-        });
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         FeedResponse request = retrofit.create(FeedResponse.class);

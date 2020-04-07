@@ -12,10 +12,10 @@ public interface GetDataContract {
         void onGetDataFailure(String message);
     }
     interface Presenter{
-        void getDataFromURL(Context context, String url);
+        void getDataFromURL(Context context);
     }
     interface Interactor{
-        void initRetrofitCall(Context context, String url);
+        void initRetrofitCall(Context context);
 
     }
     interface onGetDataListener{

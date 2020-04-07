@@ -3,8 +3,6 @@ package com.assignment.dailyfeed.net;
 import android.content.Context;
 
 import com.assignment.dailyfeed.model.FeedItem;
-import com.assignment.dailyfeed.model.FeedModel;
-
 import java.util.List;
 
 public class Presenter implements GetDataContract.Presenter, GetDataContract.onGetDataListener {
@@ -17,8 +15,8 @@ public class Presenter implements GetDataContract.Presenter, GetDataContract.onG
     }
 
     @Override
-    public void getDataFromURL(Context context, String url) {
-        mInteractor.initRetrofitCall(context, url);
+    public void getDataFromURL(Context context) {
+        mInteractor.initRetrofitCall(context);
     }
 
     @Override

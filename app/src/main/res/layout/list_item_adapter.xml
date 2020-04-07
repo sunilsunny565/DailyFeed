@@ -22,19 +22,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_description"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:id="@+id/img_feed_image"
-                android:layout_width="150dp"
-                android:layout_height="100dp"/>
+                android:layout_width="wrap_content"
+                android:minHeight="90dp"
+                android:minWidth="100dp"
+                android:layout_height="wrap_content"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
     <ImageView
         android:layout_gravity="center"
-        android:layout_width="50dp"
+        android:layout_width="40dp"
         android:src="@drawable/forward_arrow"
         android:padding="@dimen/default_padding"
         android:layout_height="match_parent">

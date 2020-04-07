@@ -14,23 +14,22 @@ import com.assignment.dailyfeed.net.Presenter;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements GetDataContract.View {
-    private Presenter mPresenter;
-    ListView listView;
-    FeedAdapter feedAdapter;
+    private ListView listView;
+    private FeedAdapter feedAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPresenter = new Presenter(this);
-        mPresenter.getDataFromURL(getApplicationContext(), "");
+        Presenter mPresenter = new Presenter(this);
+        mPresenter.getDataFromURL(getApplicationContext());
         listView = findViewById(R.id.list_item);
     }
 
     @Override
     public void onGetDataSuccess(String message, List<FeedItem> feedItems) {
-        feedAdapter = new FeedAdapter(getApplicationContext(), feedItems);listView.setAdapter(feedAdapter);
-
+        feedAdapter = new FeedAdapter(getApplicationContext(), feedItems);
+        listView.setAdapter(feedAdapter);
     }
 
     @Override
