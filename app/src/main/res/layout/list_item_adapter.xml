@@ -14,6 +14,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:textStyle="bold"
+            android:textColor="@color/colorDarkBlue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -24,14 +25,15 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_description"
                 android:layout_width="0dp"
+                android:textColor="@android:color/black"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
             <ImageView
+                android:paddingLeft="@dimen/default_padding"
                 android:id="@+id/img_feed_image"
-                android:layout_width="wrap_content"
-                android:minHeight="90dp"
-                android:minWidth="100dp"
-                android:layout_height="wrap_content"/>
+                android:layout_width="100dp"
+                android:visibility="gone"
+                android:layout_height="90dp"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -41,5 +43,5 @@
         android:src="@drawable/forward_arrow"
         android:padding="@dimen/default_padding"
         android:layout_height="match_parent">
-    </ImageView>x
+    </ImageView>
 </androidx.appcompat.widget.LinearLayoutCompat>

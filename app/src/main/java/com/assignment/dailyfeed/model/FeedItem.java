@@ -15,6 +15,15 @@ public class FeedItem {
     @SerializedName("imageHref")
     @Expose
     private String feedImage;
+    private boolean IsBadImage;
+
+    public void setBadImage(boolean badImage) {
+        IsBadImage = badImage;
+    }
+
+    public boolean isBadImage() {
+        return IsBadImage;
+    }
 
     public void setTitle(String title) {
         this.feedTitle = title;
