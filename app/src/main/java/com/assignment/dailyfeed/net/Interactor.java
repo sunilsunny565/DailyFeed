@@ -20,7 +20,7 @@ public class Interactor implements GetDataContract.Interactor{
     private List<FeedItem> feeds = new ArrayList<>();
 
 
-    public Interactor(GetDataContract.onGetDataListener mOnGetDatalistener) {
+    Interactor(GetDataContract.onGetDataListener mOnGetDatalistener) {
         this.mOnGetDatalistener = mOnGetDatalistener;
     }
 
@@ -39,10 +39,16 @@ public class Interactor implements GetDataContract.Interactor{
             @Override
             public void onResponse(retrofit2.Call<FeedModel> call, retrofit2.Response<FeedModel> response) {
                 FeedModel jsonResponse = response.body();
-                feeds = jsonResponse.getFeedItems();
-                if(feeds != null){
-                    Log.d("Data", "Refreshed");
-                    mOnGetDatalistener.onSuccess("List Size: " + feeds.size(), feeds);
+                if(jsonResponse != null && jsonResponse.getFeedItems() != null){
+                    for (FeedItem feedItem: jsonResponse.getFeedItems()) {
+                        if(feedItem.getDescription() != null && feedItem.getImageHref()!= null && feedItem.getDescription() !=null){
+                            feeds.add(feedItem) ;
+                        }
+                    }
+                    if(feeds != null){
+                        Log.d("Data", "Refreshed");
+                        mOnGetDatalistener.onSuccess(jsonResponse.getTitle(), feeds);
+                    }
                 }
             }
 

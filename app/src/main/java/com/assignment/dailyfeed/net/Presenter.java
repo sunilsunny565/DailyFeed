@@ -20,8 +20,8 @@ public class Presenter implements GetDataContract.Presenter, GetDataContract.onG
     }
 
     @Override
-    public void onSuccess(String message, List<FeedItem> feedDatas) {
-        mGetDataView.onGetDataSuccess(message, feedDatas);
+    public void onSuccess(String appTitle, List<FeedItem> feedDatas) {
+        mGetDataView.onGetDataSuccess(appTitle, feedDatas);
     }
 
     @Override

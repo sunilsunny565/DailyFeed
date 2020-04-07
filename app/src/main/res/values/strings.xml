@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DailyFeed</string>
+    <string name="dailyfeeds">DailyFeeds</string>
+    <string name="daily_feed_fragment">DailyFeedFragment</string>
 </resources>

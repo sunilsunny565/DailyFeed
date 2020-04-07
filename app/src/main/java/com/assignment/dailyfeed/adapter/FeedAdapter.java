@@ -71,8 +71,10 @@ public class FeedAdapter extends BaseAdapter {
                         .listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                feedImage.setVisibility(View.GONE);
-                                getItem(i).setBadImage(true);
+                                if(getCount() > 0){
+                                    feedImage.setVisibility(View.GONE);
+                                    getItem(i).setBadImage(true);
+                                }
                                 return false;
                             }
 
