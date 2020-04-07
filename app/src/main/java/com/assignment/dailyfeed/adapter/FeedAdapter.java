@@ -31,6 +31,10 @@ public class FeedAdapter extends BaseAdapter {
         this.feedItems = feedItems;
     }
 
+    public List<FeedItem> getFeedItems() {
+        return feedItems;
+    }
+
     @Override
     public int getCount() {
         return feedItems.size();

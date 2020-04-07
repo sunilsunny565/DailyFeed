@@ -6,10 +6,17 @@
     android:background="@color/colorWhite"
     tools:context=".MainActivity">
 
-    <ListView
-        android:id="@+id/list_item"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_pull_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+        <ListView
+            android:id="@+id/list_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </androidx.appcompat.widget.LinearLayoutCompat>
