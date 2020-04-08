@@ -1,80 +1,65 @@
 package com.assignment.dailyfeed.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.assignment.dailyfeed.R;
 import com.assignment.dailyfeed.adapter.FeedAdapter;
+import com.assignment.dailyfeed.databinding.DailyFeedFragmentBinding;
 import com.assignment.dailyfeed.model.FeedItem;
-import com.assignment.dailyfeed.net.GetDataContract;
-import com.assignment.dailyfeed.net.Presenter;
+import com.assignment.dailyfeed.viewmodel.FeedItemViewModel;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class DailyFeedFragment extends Fragment implements GetDataContract.View {
+public class DailyFeedFragment extends Fragment{
     private ListView listView;
     private FeedAdapter feedAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
     ProgressBar progressBar;
-
-    @Override
-    public void onGetDataSuccess(String appTitle, List<FeedItem> feedItems) {
-        swipeRefreshLayout.setRefreshing(false);
-        progressBar.setVisibility(View.GONE);
-        if (appTitle != null) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(appTitle);
-        }
-        if (feedAdapter == null) {
-            feedAdapter = new FeedAdapter(getContext(), feedItems);
-            listView.setAdapter(feedAdapter);
-        } else {
-            feedAdapter.getFeedItems().addAll(feedItems);
-            feedAdapter.notifyDataSetChanged();
-        }
-
-    }
+    private FeedItemViewModel viewModel;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initUIControls();
+        setupBindings(savedInstanceState);
     }
 
-    private void initUIControls() {
-        Presenter mPresenter = new Presenter(this);
-        mPresenter.getDataFromURL(getContext());
-        listView = view.findViewById(R.id.list_item);
-        progressBar = view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
-        swipeRefreshLayout = view.findViewById(R.id.srl_pull_to_refresh);
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            feedAdapter.getFeedItems().clear();
-            feedAdapter.notifyDataSetChanged();
-            mPresenter.getDataFromURL(getContext());
-            progressBar.setVisibility(View.VISIBLE);
+    private void setupBindings(Bundle savedInstanceState) {
+        DailyFeedFragmentBinding activityBinding = DataBindingUtil.setContentView(getActivity(), R.layout.daily_feed_fragment);
+        viewModel = new ViewModelProvider(this).get(FeedItemViewModel.class);
+        if (savedInstanceState == null) {
+            viewModel.init();
+        }
+        activityBinding.setModel(viewModel);
+        setupListUpdate();
+    }
+    private void setupListUpdate() {
+        viewModel.loading.set(View.VISIBLE);
+        viewModel.fetchList();
+        viewModel.getFeeds().observe(getActivity(), feedItems -> {
+            viewModel.loading.set(View.GONE);
+            if (feedItems.size() == 0) {
+                viewModel.showEmpty.set(View.VISIBLE);
+            } else {
+                viewModel.showEmpty.set(View.GONE);
+                viewModel.setFeedsInAdapter(feedItems);
+                if(viewModel.getTitle() != null) {
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(viewModel.getTitle());
+                }
+                viewModel.isLoading.set(false);
+            }
         });
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.daily_feed_fragment, null);
-        return view;
-    }
-
-    @Override
-    public void onGetDataFailure(String message) {
-        progressBar.setVisibility(View.GONE);
-    }
 }

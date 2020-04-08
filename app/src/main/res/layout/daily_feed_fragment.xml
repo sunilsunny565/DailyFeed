@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    tools:context=".MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/srl_pull_to_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <data>
+        <variable
+            name="model"
+            type="com.assignment.dailyfeed.viewmodel.FeedItemViewModel" />
+    </data>
 
-        <ListView
-            android:id="@+id/list_item"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.DailyFeedFragment">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srl_pull_to_refresh"
             android:layout_width="match_parent"
+            app:onRefreshListener="@{() -> model.onRefresh()}"
+            app:refreshing="@{model.isLoading}"
             android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/list_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:setAdapter="@{model.getAdapter()}" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        </ListView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:id="@+id/progressBar"
+            android:indeterminate="true"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="@{model.loading}"
+            android:layout_gravity="center"/>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{model.showEmpty}"
+            android:text="@string/no_feeds_to_show"/>
+
+    </FrameLayout>
+</layout>

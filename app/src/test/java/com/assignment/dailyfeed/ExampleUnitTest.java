@@ -1,15 +1,12 @@
 package com.assignment.dailyfeed;
 
 import com.assignment.dailyfeed.model.FeedItem;
-import com.assignment.dailyfeed.net.GetDataContract;
-import com.assignment.dailyfeed.net.Interactor;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 /**
