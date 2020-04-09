@@ -27,6 +27,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 android:textStyle="bold"
+                android:textSize="@dimen/default_text_size"
                 android:text="@{viewModel.feeds.get(position).title}"
                 android:textColor="@color/colorDarkBlue"
                 android:layout_width="match_parent"
@@ -39,6 +40,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_description"
                     android:layout_width="0dp"
+                    android:textSize="@dimen/default_text_size"
                     android:textColor="@android:color/black"
                     android:layout_weight="1"
                     android:text="@{viewModel.feeds.get(position).description}"
