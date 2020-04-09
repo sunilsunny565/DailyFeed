@@ -21,6 +21,7 @@ public class FeedItemViewModel extends ViewModel {
     private FeedAdapter adapter;
     public ObservableBoolean isLoading;
 
+    //initialization of objects
     public void init() {
         feedItems = new FeedItems();
         adapter = new FeedAdapter(R.layout.list_item_adapter, this);
@@ -28,28 +29,39 @@ public class FeedItemViewModel extends ViewModel {
         showEmpty = new ObservableInt(View.GONE);
         isLoading = new ObservableBoolean();
     }
+
+    // Method for fetching the list from Api
     public void fetchList() {
         feedItems.fetchList();
     }
+
+    // Method to perform pull to refresh
     public void onRefresh() {
         isLoading.set(true);
-        if( getFeeds().getValue() != null &&  getFeeds().getValue().size() > 0){
+        if (getFeeds().getValue() != null && getFeeds().getValue().size() > 0) {
             getFeeds().getValue().clear();
             adapter.notifyDataSetChanged();
         }
-        loading.set(View.VISIBLE);
         fetchList();
     }
-    public String getTitle(){ return feedItems.getTitle();}
+
+    public String getTitle() {
+        return feedItems.getTitle();
+    }
 
     public MutableLiveData<List<FeedItem>> getFeeds() {
         return feedItems.getFeeds();
+    }
+
+    public MutableLiveData<String> getStatus() {
+        return feedItems.getStatus();
     }
 
     public FeedAdapter getAdapter() {
         return adapter;
     }
 
+    //Method for setting the adapter
     public void setFeedsInAdapter(List<FeedItem> feeds) {
         this.adapter.setFeedItems(feeds);
         this.adapter.notifyDataSetChanged();

@@ -17,6 +17,7 @@ public class FeedItem {
     private String feedImage;
     private boolean IsBadImage;
 
+    //required for preventing loading bad url again and again
     public void setBadImage(boolean badImage) {
         IsBadImage = badImage;
     }
@@ -28,18 +29,23 @@ public class FeedItem {
     public void setTitle(String title) {
         this.feedTitle = title;
     }
+
     public String getTitle() {
         return this.feedTitle;
     }
+
     public void setDescription(String description) {
         this.feedDescription = description;
     }
+
     public String getDescription() {
         return this.feedDescription;
     }
+
     public void setImageHref(String imageHref) {
         this.feedImage = imageHref;
     }
+
     public String getImageHref() {
         return this.feedImage;
     }

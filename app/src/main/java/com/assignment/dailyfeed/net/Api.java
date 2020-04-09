@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 
 public class Api {
     private static ApiInterface api;
-    private static final String BASE_URL ="https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/";
+    private static final String BASE_URL = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/";
 
     public static ApiInterface getApi() {
         if (api == null) {

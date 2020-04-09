@@ -20,16 +20,14 @@ public class FeedItems extends BaseObservable {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     private List<FeedItem> feedsList = new ArrayList<>();
     private MutableLiveData<List<FeedItem>> feeds = new MutableLiveData<>();
+    private MutableLiveData<String> status = new MutableLiveData<>();
 
-    public void fetchFeedItems(String title, List<FeedItem> feedItems) {
+    //   This method is required for adding all null parameter objects.
+    private void AddFeedItems(String title, List<FeedItem> feedItems) {
         for (FeedItem feedItem : feedItems) {
-            if (feedItem.getDescription() != null && feedItem.getImageHref() != null && feedItem.getDescription() != null) {
+            if (feedItem.getTitle() != null || feedItem.getImageHref() != null || feedItem.getDescription() != null) {
                 feedsList.add(feedItem);
             }
         }
@@ -41,22 +39,27 @@ public class FeedItems extends BaseObservable {
         return feeds;
     }
 
+    // Method for fetching the feed items from APi
     public void fetchList() {
         Callback<FeedModel> callback = new Callback<FeedModel>() {
             @Override
             public void onResponse(Call<FeedModel> call, Response<FeedModel> response) {
                 FeedModel feedResponse = response.body();
                 if (feedResponse != null && feedResponse.getFeedItems() != null) {
-                    fetchFeedItems(feedResponse.title, feedResponse.getFeedItems());
+                    AddFeedItems(feedResponse.title, feedResponse.getFeedItems());
                 }
             }
 
             @Override
             public void onFailure(Call<FeedModel> call, Throwable t) {
-                Log.e("Test", t.getMessage(), t);
+                status.setValue(t.getMessage());
             }
         };
 
         Api.getApi().getFeedItems().enqueue(callback);
+    }
+
+    public MutableLiveData<String> getStatus() {
+        return status;
     }
 }

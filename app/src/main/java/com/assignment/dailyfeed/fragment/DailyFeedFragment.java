@@ -13,7 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-public class DailyFeedFragment extends Fragment{
+public class DailyFeedFragment extends Fragment {
     private FeedItemViewModel viewModel;
 
     @Override
@@ -22,6 +22,7 @@ public class DailyFeedFragment extends Fragment{
         setupBindings(savedInstanceState);
     }
 
+    // Method for initializing the view bindings
     private void setupBindings(Bundle savedInstanceState) {
         DailyFeedFragmentBinding activityBinding = DataBindingUtil.setContentView(getActivity(), R.layout.daily_feed_fragment);
         viewModel = new ViewModelProvider(this).get(FeedItemViewModel.class);
@@ -31,21 +32,28 @@ public class DailyFeedFragment extends Fragment{
         activityBinding.setModel(viewModel);
         setupListUpdate();
     }
+
+    //Method for observing list and status updates
     private void setupListUpdate() {
         viewModel.loading.set(View.VISIBLE);
         viewModel.fetchList();
         viewModel.getFeeds().observe(getActivity(), feedItems -> {
             viewModel.loading.set(View.GONE);
+            viewModel.isLoading.set(false);
             if (feedItems.size() == 0) {
                 viewModel.showEmpty.set(View.VISIBLE);
             } else {
                 viewModel.showEmpty.set(View.GONE);
                 viewModel.setFeedsInAdapter(feedItems);
-                if(viewModel.getTitle() != null) {
+                if (viewModel.getTitle() != null) {
                     ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(viewModel.getTitle());
                 }
-                viewModel.isLoading.set(false);
             }
+        });
+        viewModel.getStatus().observe(getActivity(), status -> {
+            viewModel.loading.set(View.GONE);
+            viewModel.isLoading.set(false);
+            viewModel.showEmpty.set(View.VISIBLE);
         });
     }
 

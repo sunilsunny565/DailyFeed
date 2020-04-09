@@ -21,12 +21,11 @@ public class CustomBindings {
             Glide.with(imageView)
                     .load(feedItem.getImageHref())
                     .listener(new RequestListener<Drawable>() {
+                        //Required for hiding the ImageView if url failed to load
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            if(imageView.getVisibility() == View.VISIBLE){
-                                imageView.setVisibility(View.GONE);
-                                feedItem.setBadImage(true);
-                            }
+                            imageView.setVisibility(View.GONE);
+                            feedItem.setBadImage(true);
                             return false;
                         }
 

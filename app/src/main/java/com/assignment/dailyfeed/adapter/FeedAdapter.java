@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
 import com.assignment.dailyfeed.BR;
 import com.assignment.dailyfeed.model.FeedItem;
 import com.assignment.dailyfeed.viewmodel.FeedItemViewModel;
@@ -51,7 +52,6 @@ public class FeedAdapter extends BaseAdapter {
             inflater = ((Activity) parent.getContext()).getLayoutInflater();
         }
         // Perform the binding
-
         ViewDataBinding binding = DataBindingUtil.getBinding(view);
 
         if (binding == null) {
