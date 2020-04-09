@@ -1,12 +1,11 @@
 package com.assignment.dailyfeed.model;
 
-import android.util.Log;
-
 import com.assignment.dailyfeed.net.Api;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.lifecycle.MutableLiveData;
 import retrofit2.Call;
@@ -43,7 +42,7 @@ public class FeedItems extends BaseObservable {
     public void fetchList() {
         Callback<FeedModel> callback = new Callback<FeedModel>() {
             @Override
-            public void onResponse(Call<FeedModel> call, Response<FeedModel> response) {
+            public void onResponse(@NonNull Call<FeedModel> call, Response<FeedModel> response) {
                 FeedModel feedResponse = response.body();
                 if (feedResponse != null && feedResponse.getFeedItems() != null) {
                     AddFeedItems(feedResponse.title, feedResponse.getFeedItems());
@@ -51,7 +50,7 @@ public class FeedItems extends BaseObservable {
             }
 
             @Override
-            public void onFailure(Call<FeedModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<FeedModel> call, Throwable t) {
                 status.setValue(t.getMessage());
             }
         };

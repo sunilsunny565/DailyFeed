@@ -7,6 +7,8 @@ import com.assignment.dailyfeed.R;
 import com.assignment.dailyfeed.databinding.DailyFeedFragmentBinding;
 import com.assignment.dailyfeed.viewmodel.FeedItemViewModel;
 
+import java.util.Objects;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -24,7 +26,7 @@ public class DailyFeedFragment extends Fragment {
 
     // Method for initializing the view bindings
     private void setupBindings(Bundle savedInstanceState) {
-        DailyFeedFragmentBinding activityBinding = DataBindingUtil.setContentView(getActivity(), R.layout.daily_feed_fragment);
+        DailyFeedFragmentBinding activityBinding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.daily_feed_fragment);
         viewModel = new ViewModelProvider(this).get(FeedItemViewModel.class);
         if (savedInstanceState == null) {
             viewModel.init();
@@ -37,7 +39,7 @@ public class DailyFeedFragment extends Fragment {
     private void setupListUpdate() {
         viewModel.loading.set(View.VISIBLE);
         viewModel.fetchList();
-        viewModel.getFeeds().observe(getActivity(), feedItems -> {
+        viewModel.getFeeds().observe(Objects.requireNonNull(getActivity()), feedItems -> {
             viewModel.loading.set(View.GONE);
             viewModel.isLoading.set(false);
             if (feedItems.size() == 0) {
@@ -46,11 +48,11 @@ public class DailyFeedFragment extends Fragment {
                 viewModel.showEmpty.set(View.GONE);
                 viewModel.setFeedsInAdapter(feedItems);
                 if (viewModel.getTitle() != null) {
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(viewModel.getTitle());
+                    Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(viewModel.getTitle());
                 }
             }
         });
-        viewModel.getStatus().observe(getActivity(), status -> {
+        viewModel.getStatus().observe(Objects.requireNonNull(getActivity()), status -> {
             viewModel.loading.set(View.GONE);
             viewModel.isLoading.set(false);
             viewModel.showEmpty.set(View.VISIBLE);

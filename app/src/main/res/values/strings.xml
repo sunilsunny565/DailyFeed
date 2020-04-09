@@ -2,5 +2,5 @@
     <string name="app_name">DailyFeed</string>
     <string name="dailyfeeds">DailyFeeds</string>
     <string name="daily_feed_fragment">DailyFeedFragment</string>
-    <string name="no_feeds_to_show">No feeds to show.</string>
+    <string name="no_feeds_to_show">No feeds to show.\nPlease check your network and try again.</string>
 </resources>
