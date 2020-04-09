@@ -17,9 +17,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
 public class FeedAdapter extends BaseAdapter {
-    private int layoutId;
+    private final int layoutId;
     private List<FeedItem> feeds;
-    private FeedItemViewModel viewModel;
+    private final FeedItemViewModel viewModel;
     private LayoutInflater inflater;
 
     public FeedAdapter(@LayoutRes int layoutId, FeedItemViewModel viewModel) {

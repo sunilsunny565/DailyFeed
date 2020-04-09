@@ -19,9 +19,9 @@ public class FeedItems extends BaseObservable {
         return title;
     }
 
-    private List<FeedItem> feedsList = new ArrayList<>();
-    private MutableLiveData<List<FeedItem>> feeds = new MutableLiveData<>();
-    private MutableLiveData<String> status = new MutableLiveData<>();
+    private final List<FeedItem> feedsList = new ArrayList<>();
+    private final MutableLiveData<List<FeedItem>> feeds = new MutableLiveData<>();
+    private final MutableLiveData<String> status = new MutableLiveData<>();
 
     //   This method is required for adding all null parameter objects.
     private void AddFeedItems(String title, List<FeedItem> feedItems) {
@@ -45,7 +45,7 @@ public class FeedItems extends BaseObservable {
             public void onResponse(@NonNull Call<FeedModel> call, Response<FeedModel> response) {
                 FeedModel feedResponse = response.body();
                 if (feedResponse != null && feedResponse.getFeedItems() != null) {
-                    AddFeedItems(feedResponse.title, feedResponse.getFeedItems());
+                    AddFeedItems(feedResponse.getTitle(), feedResponse.getFeedItems());
                 }
             }
 

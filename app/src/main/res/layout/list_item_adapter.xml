@@ -51,7 +51,8 @@
                     android:layout_width="@dimen/image_width"
                     android:layout_height="@dimen/image_height"
                     android:visibility="gone"
-                    app:imageUrl='@{viewModel.feeds.get(position)}' />
+                    app:imageUrl='@{viewModel.feeds.get(position)}'
+                    android:contentDescription="@string/feed_image_description" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -60,7 +61,8 @@
             android:layout_width="@dimen/image_arrow_width"
             android:layout_height="@dimen/image_arrow_height"
             android:src="@drawable/forward_arrow"
-            android:padding="@dimen/default_padding">
+            android:padding="@dimen/default_padding"
+            android:contentDescription="@string/forward_arrow_for_navigation">
         </ImageView>
     </androidx.appcompat.widget.LinearLayoutCompat>
 

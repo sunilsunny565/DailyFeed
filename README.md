@@ -1,5 +1,5 @@
 An app for fetching data from Api using the MVVM design pattern.
-The following are the other funtionalitis.
+The following are the other functionalist's.
 1) Pull to refresh for refreshing the data.
 
 External liberiries used:

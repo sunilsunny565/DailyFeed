@@ -9,13 +9,17 @@ public class FeedModel {
 
     @SerializedName("title")
     @Expose
-    String title;
+    private String title;
     @SerializedName("rows")
     @Expose
     private List<FeedItem> feedItems;
 
     List<FeedItem> getFeedItems() {
         return feedItems;
+    }
+
+    String getTitle() {
+        return title;
     }
 }
 
