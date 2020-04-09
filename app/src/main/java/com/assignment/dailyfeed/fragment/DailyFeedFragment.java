@@ -2,31 +2,18 @@ package com.assignment.dailyfeed.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import com.assignment.dailyfeed.R;
-import com.assignment.dailyfeed.adapter.FeedAdapter;
 import com.assignment.dailyfeed.databinding.DailyFeedFragmentBinding;
-import com.assignment.dailyfeed.model.FeedItem;
 import com.assignment.dailyfeed.viewmodel.FeedItemViewModel;
-
-import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class DailyFeedFragment extends Fragment{
-    private ListView listView;
-    private FeedAdapter feedAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private View view;
-    ProgressBar progressBar;
     private FeedItemViewModel viewModel;
 
     @Override
