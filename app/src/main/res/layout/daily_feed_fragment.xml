@@ -30,8 +30,8 @@
             style="?android:attr/progressBarStyleLarge"
             android:id="@+id/progressBar"
             android:indeterminate="true"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/loader_width"
+            android:layout_height="@dimen/loader_height"
             android:visibility="@{model.loading}"
             android:layout_gravity="center"/>
 

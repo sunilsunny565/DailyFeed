@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/txt_splash"
-        android:textSize="50sp"
+        android:textSize="@dimen/splash_text_size"
         android:text="@string/dailyfeeds"
         android:textStyle="bold"
         android:textColor="@color/colorWhite"

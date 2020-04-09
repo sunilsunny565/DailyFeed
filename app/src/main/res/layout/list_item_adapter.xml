@@ -46,19 +46,19 @@
                 <ImageView
                     android:paddingLeft="@dimen/default_padding"
                     android:id="@+id/img_feed_image"
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
                     android:visibility="gone"
-                    app:imageUrl='@{viewModel.feeds.get(position)}'
-                    android:layout_height="90dp"/>
+                    app:imageUrl='@{viewModel.feeds.get(position)}' />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
         <ImageView
             android:layout_gravity="center"
-            android:layout_width="40dp"
+            android:layout_width="@dimen/image_arrow_width"
+            android:layout_height="@dimen/image_arrow_height"
             android:src="@drawable/forward_arrow"
-            android:padding="@dimen/default_padding"
-            android:layout_height="match_parent">
+            android:padding="@dimen/default_padding">
         </ImageView>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
