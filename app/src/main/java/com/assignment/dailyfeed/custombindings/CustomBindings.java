@@ -31,7 +31,9 @@ public class CustomBindings {
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            imageView.setVisibility(View.VISIBLE);
+                            if(!feedItem.isBadImage()){
+                                imageView.setVisibility(View.VISIBLE);
+                            }
                             return false;
                         }
                     })

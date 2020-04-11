@@ -1,5 +1,7 @@
 package com.assignment.dailyfeed.model;
 
+import android.text.TextUtils;
+
 import com.assignment.dailyfeed.net.Api;
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ public class FeedItems extends BaseObservable {
     //   This method is required for adding all null parameter objects.
     private void AddFeedItems(String title, List<FeedItem> feedItems) {
         for (FeedItem feedItem : feedItems) {
-            if (feedItem.getTitle() != null || feedItem.getImageHref() != null || feedItem.getDescription() != null) {
+            if (!TextUtils.isEmpty(feedItem.getTitle())|| !TextUtils.isEmpty(feedItem.getImageHref())|| !TextUtils.isEmpty(feedItem.getDescription())) {
                 feedsList.add(feedItem);
             }
         }
