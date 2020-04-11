@@ -25,7 +25,7 @@ public class FeedItems extends BaseObservable {
     private final MutableLiveData<List<FeedItem>> feeds = new MutableLiveData<>();
     private final MutableLiveData<String> status = new MutableLiveData<>();
 
-    //   This method is required for adding all null parameter objects.
+    //   This method is required for neglecting all null and empty value parameter objects.
     private void AddFeedItems(String title, List<FeedItem> feedItems) {
         for (FeedItem feedItem : feedItems) {
             if (!TextUtils.isEmpty(feedItem.getTitle())|| !TextUtils.isEmpty(feedItem.getImageHref())|| !TextUtils.isEmpty(feedItem.getDescription())) {

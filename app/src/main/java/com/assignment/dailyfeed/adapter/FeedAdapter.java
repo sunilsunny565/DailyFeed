@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.assignment.dailyfeed.BR;
+import com.assignment.dailyfeed.databinding.ListItemAdapterBinding;
 import com.assignment.dailyfeed.model.FeedItem;
 import com.assignment.dailyfeed.viewmodel.FeedItemViewModel;
 
@@ -14,7 +15,6 @@ import java.util.List;
 
 import androidx.annotation.LayoutRes;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
 public class FeedAdapter extends BaseAdapter {
     private final int layoutId;
@@ -52,7 +52,7 @@ public class FeedAdapter extends BaseAdapter {
             inflater = ((Activity) parent.getContext()).getLayoutInflater();
         }
         // Perform the binding
-        ViewDataBinding binding = DataBindingUtil.getBinding(view);
+        ListItemAdapterBinding binding = DataBindingUtil.getBinding(view);
 
         if (binding == null) {
             binding = DataBindingUtil.inflate(inflater, layoutId, parent, false);
